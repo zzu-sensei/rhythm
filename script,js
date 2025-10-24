@@ -1,0 +1,46 @@
+document.addEventListener('DOMContentLoaded', () => {
+    const titleElement = document.getElementById('typing-title');
+    
+    // 在这里修改成你的社团Slogan
+    const titleText = "[你的音游社团名] - Flow with the Beat_"; 
+    
+    let charIndex = 0;
+
+    function typeEffect() {
+        if (charIndex < titleText.length) {
+            // 如果是光标字符 '_'，则添加一个特殊的 span
+            if (titleText.charAt(charIndex) === '_') {
+                titleElement.innerHTML = titleElement.innerHTML.replace('<span class="cursor">_</span>', ''); // 移除旧光标
+                titleElement.innerHTML += '<span class="cursor">_</span>';
+            } else {
+                // 移除光标，添加新字符，再加回光标
+                titleElement.innerHTML = titleElement.innerHTML.replace('<span class="cursor">_</span>', '');
+                titleElement.innerHTML += titleText.charAt(charIndex);
+                titleElement.innerHTML += '<span class="cursor">_</span>';
+            }
+            
+            charIndex++;
+            setTimeout(typeEffect, 150); // 打字速度
+        } else {
+            // 打字完成后，让光标持续闪烁
+            // (CSS 已经处理了 .cursor 的闪烁)
+        }
+    }
+
+    // 额外添加 CSS 来实现光标闪烁
+    const style = document.createElement('style');
+    style.innerHTML = `
+        .cursor {
+            color: var(--primary-color); /* 光标使用主色调 */
+            animation: blink 0.7s infinite;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+    `;
+    document.head.appendChild(style);
+
+    // 启动打字效果
+    typeEffect();
+});
