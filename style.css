@@ -68,10 +68,12 @@ a {
     align-items: center;
     justify-content: center;
     text-align: center;
+    /* 你可以替换成你喜欢的背景图 */
     background: linear-gradient(rgba(10, 10, 26, 0.8), rgba(10, 10, 26, 0.8)), url('https://images.unsplash.com/photo-1511447333015-45b65e60f6d5?q=80&w=1910&auto=format=fit=crop');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
+    position: relative; /* 【【【重要修复】】】 为了让箭头正确定位 */
 }
 
 .hero-content h1 {
@@ -85,6 +87,48 @@ a {
     font-size: 1.5rem;
     color: var(--text-color);
     margin-bottom: 30px;
+}
+
+/* --- 【新增】滚动提醒 --- */
+.scroll-down-prompt {
+    position: absolute;
+    bottom: 40px; /* 箭头距离页面底部 40px */
+    left: 50%;
+    transform: translateX(-50%); /* 水平居中 */
+    z-index: 10;
+    cursor: pointer;
+    padding: 10px; /* 增大点击区域 */
+}
+
+.arrow-down {
+    width: 20px; /* 箭头大小 */
+    height: 20px;
+    border: 3px solid var(--primary-color); /* 自动使用主题的主色调 */
+    border-top: 0;
+    border-left: 0;
+    transform: rotate(45deg); /* 旋转 45 度 */
+    opacity: 0.7;
+    box-shadow: 0 0 10px var(--primary-color); /* 辉光 */
+    animation: bounce-arrow 2s infinite; /* 呼吸/跳动动画 */
+}
+
+.scroll-down-prompt:hover .arrow-down {
+    opacity: 1;
+}
+
+/* 箭头跳动动画 */
+@keyframes bounce-arrow {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0) rotate(45deg);
+    }
+
+    40% {
+        transform: translateY(10px) rotate(45deg); /* 向下移动 10px */
+    }
+
+    60% {
+        transform: translateY(5px) rotate(45deg);
+    }
 }
 
 /* --- 关于我们 (About Us) 专属样式 --- */
@@ -143,15 +187,12 @@ a {
     border-radius: 8px;
     box-shadow: 0 0 20px rgba(57, 255, 20, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex; /* 使用 flex 布局，确保卡片等高 */
+    flex-direction: column;
 }
 
-    .feature-card:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 0 30px rgba(57, 255, 20, 0.3);
-    }
-
 .card-icon {
-    font-size: 2.5rem; /* 图标缩小一点 */
+    font-size: 2.5rem; /* 图标大小 */
     margin-bottom: 10px;
 }
 
@@ -164,6 +205,7 @@ a {
 .feature-card ul {
     list-style: none; /* 移除默认圆点 */
     padding-left: 0;
+    flex-grow: 1; /* 让列表填满剩余空间 */
 }
 
     .feature-card ul li {
@@ -186,7 +228,7 @@ a {
             color: var(--text-color);
         }
 
-/* --- 【新增】你能获得什么 (Benefits) 样式 --- */
+/* --- 你能获得什么 (Benefits) 样式 --- */
 #benefits {
     background-color: var(--card-bg); /* 给这个区域一个深色背景 */
     border-top: 1px dashed var(--primary-color);
@@ -216,7 +258,7 @@ a {
             transform: translateX(5px);
         }
 
-/* --- 【新增】群友风采 (Gallery) 样式 --- */
+/* --- 群友风采 (Gallery) 样式 --- */
 .gallery-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -314,6 +356,6 @@ footer {
     }
 
     .about-text, .benefits-list {
-        text-align: center; /* 手机上改回居中 */
+        text-align: left; /* 在手机上也保持左对齐 */
     }
 }
