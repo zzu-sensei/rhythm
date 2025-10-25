@@ -1,8 +1,8 @@
 /* --- 全局样式 --- */
 :root {
     --primary-color: #39FF14; /* 主色调 - 霓虹荧光绿 */
-    --secondary-color: #00BFFF; /* 辅助色 - 律动蓝 (DeepSkyBlue) */
-    --bg-color: #0a0a1a; /* 深色背景 */
+    --secondary-color: #00BFFF; /* 辅助色 - 律动蓝 */
+    --bg-color: #0a0a1a;
     --text-color: #e0e0e0;
     --card-bg: #1a1a3a;
 }
@@ -37,6 +37,9 @@ h2 {
 p {
     font-size: 1.1rem;
     margin-bottom: 20px;
+    max-width: 800px; /* 限制段落最大宽度，提高可读性 */
+    margin-left: auto;
+    margin-right: auto;
 }
 
 a {
@@ -65,11 +68,10 @@ a {
     align-items: center;
     justify-content: center;
     text-align: center;
-    /* 换上了一张充满律动感的霓虹光轨背景图 */
     background: linear-gradient(rgba(10, 10, 26, 0.8), rgba(10, 10, 26, 0.8)), url('https://images.unsplash.com/photo-1511447333015-45b65e60f6d5?q=80&w=1910&auto=format=fit=crop');
     background-size: cover;
     background-position: center;
-    background-attachment: fixed; /* 视差效果 */
+    background-attachment: fixed;
 }
 
 .hero-content h1 {
@@ -83,6 +85,26 @@ a {
     font-size: 1.5rem;
     color: var(--text-color);
     margin-bottom: 30px;
+}
+
+/* --- 关于我们 (About Us) 专属样式 --- */
+.slogan {
+    font-size: 1.5rem;
+    color: var(--secondary-color);
+    font-weight: bold;
+    font-style: italic;
+    text-shadow: 0 0 5px var(--secondary-color);
+}
+
+.about-text {
+    text-align: left; /* 长段落左对齐 */
+    text-indent: 2em; /* 首行缩进 */
+}
+
+.disclaimer {
+    font-size: 0.9rem;
+    color: #888;
+    font-style: italic;
 }
 
 /* --- CTA 按钮 (Call to Action) --- */
@@ -111,6 +133,7 @@ a {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 30px;
+    text-align: left; /* 卡片内容左对齐 */
 }
 
 .feature-card {
@@ -118,28 +141,136 @@ a {
     padding: 30px;
     border: 1px solid var(--primary-color);
     border-radius: 8px;
-    box-shadow: 0 0 20px rgba(57, 255, 20, 0.1); /* 荧光绿的微弱辉光 */
+    box-shadow: 0 0 20px rgba(57, 255, 20, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
     .feature-card:hover {
         transform: translateY(-10px);
-        box-shadow: 0 0 30px rgba(57, 255, 20, 0.3); /* 增强辉光 */
+        box-shadow: 0 0 30px rgba(57, 255, 20, 0.3);
     }
 
 .card-icon {
-    font-size: 3rem;
+    font-size: 2.5rem; /* 图标缩小一点 */
+    margin-bottom: 10px;
+}
+
+.feature-card h3 {
+    font-size: 1.5rem;
     margin-bottom: 15px;
+    color: var(--secondary-color);
+}
+/* 卡片内的列表 */
+.feature-card ul {
+    list-style: none; /* 移除默认圆点 */
+    padding-left: 0;
+}
+
+    .feature-card ul li {
+        font-size: 1rem;
+        margin-bottom: 10px;
+        position: relative;
+        padding-left: 25px; /* 为自定义符号留出空间 */
+    }
+
+        .feature-card ul li::before {
+            content: '»'; /* 自定义列表符号 */
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        .feature-card ul li strong {
+            color: var(--text-color);
+        }
+
+/* --- 【新增】你能获得什么 (Benefits) 样式 --- */
+#benefits {
+    background-color: var(--card-bg); /* 给这个区域一个深色背景 */
+    border-top: 1px dashed var(--primary-color);
+    border-bottom: 1px dashed var(--primary-color);
+}
+
+.benefits-list {
+    list-style: none;
+    padding: 0;
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+    .benefits-list li {
+        font-size: 1.2rem;
+        margin-bottom: 15px;
+        padding: 10px;
+        border: 1px solid var(--secondary-color);
+        border-radius: 5px;
+        transition: all 0.3s ease;
+    }
+
+        .benefits-list li:hover {
+            background-color: rgba(0, 191, 255, 0.1);
+            box-shadow: 0 0 10px var(--secondary-color);
+            transform: translateX(5px);
+        }
+
+/* --- 【新增】群友风采 (Gallery) 样式 --- */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border: 2px solid var(--primary-color);
+    border-radius: 8px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+    .gallery-item img:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 25px var(--primary-color);
+    }
+
+
+/* --- 二维码区域样式 --- */
+.qrcode-section {
+    border-top: 1px dashed var(--primary-color);
+}
+
+.qrcode-container {
+    display: inline-block;
+    padding: 15px;
+    border: 2px solid var(--primary-color);
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 0 20px var(--primary-color);
+    margin-bottom: 20px;
+}
+
+    .qrcode-container img {
+        display: block;
+        width: 200px;
+        height: 200px;
+    }
+
+.qrcode-section p {
+    font-size: 1rem;
+    color: var(--text-color);
+    margin-bottom: 5px; /* 减小二维码下方文字的间距 */
 }
 
 /* --- 加入我们 --- */
 .cta-section {
     background-color: var(--card-bg);
-    border-top: 2px solid var(--primary-color);
-    border-bottom: 2px solid var(--primary-color);
 }
 
-/* --- 脉冲动画 (用于按钮) --- */
+/* --- 脉冲动画 --- */
 .pulse {
     animation: pulse-animation 2s infinite;
 }
@@ -180,5 +311,9 @@ footer {
 
     h2 {
         font-size: 2rem;
+    }
+
+    .about-text, .benefits-list {
+        text-align: center; /* 手机上改回居中 */
     }
 }

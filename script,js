@@ -1,8 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
+    
     const titleElement = document.getElementById('typing-title');
     
-    // 在这里修改成你的社团Slogan
-    const titleText = "[你的音游社团名] - Flow with the Beat_"; 
+    // Slogan 已更新
+    const titleText = "一高音游社 - Flow with the Beat_"; 
     
     let charIndex = 0;
 
